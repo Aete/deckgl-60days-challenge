@@ -5,36 +5,33 @@ import GL from '@luma.gl/constants';
 
 export default function DayOne() {
   const testUrl =
-    'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/line/heathrow-flights.json';
+    'https://raw.githubusercontent.com/Aete/deckgl-60days-challenge/master/src/utils/data/citibikeSample_202101.json';
 
   const INITIAL_VIEW_STATE = {
-    latitude: 47.65,
-    longitude: 7,
-    zoom: 4.5,
+    latitude: 40.7128,
+    longitude: -74.006,
+    zoom: 11,
     maxZoom: 16,
-    pitch: 50,
+    pitch: 0,
     bearing: 0,
   };
 
   const MAP_STYLE =
     'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json';
 
-  function getTooltip({ object }) {
-    return (
-      object &&
-      `\
-    ${object.country || object.abbrev || ''}
-    ${object.name.indexOf('0x') >= 0 ? '' : object.name}`
-    );
-  }
-
   const layer = new LineLayer({
-    id: 'flight-paths',
+    id: 'bike-paths',
     data: testUrl,
     opacity: 0.8,
-    getSourcePosition: (d) => d.start,
-    getTargetPosition: (d) => d.end,
-    getColor: (d) => [244, 67, 54],
+    getSourcePosition: (d) => [
+      d['start station longitude'],
+      d['start station latitude'],
+    ],
+    getTargetPosition: (d) => [
+      d['end station longitude'],
+      d['end station latitude'],
+    ],
+    getColor: (d) => [244, 67, 54, 50],
   });
 
   return (
@@ -46,7 +43,6 @@ export default function DayOne() {
         blendFunc: [GL.SRC_ALPHA, GL.ONE, GL.ONE_MINUS_DST_ALPHA, GL.ONE],
         blendEquation: GL.FUNC_ADD,
       }}
-      getTooltip={getTooltip}
     >
       <StaticMap reuseMaps mapStyle={MAP_STYLE} preventStyleDiffing={true} />
     </DeckGL>
