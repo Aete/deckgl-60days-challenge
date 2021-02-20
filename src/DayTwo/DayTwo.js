@@ -1,7 +1,6 @@
 import { StaticMap } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { ArcLayer } from '@deck.gl/layers';
-import GL from '@luma.gl/constants';
 
 export default function DayTwo() {
   const testUrl =
