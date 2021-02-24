@@ -79,6 +79,7 @@ export default function DaySix() {
     getFillColor: [33, 150, 243],
     getRadius: 75,
   });
+  
   return (
     <DeckGL
       layers={[arcLayer, tractLayer, endPointLayer]}
