@@ -23,6 +23,7 @@ export default function DayEight() {
     threshold: 0.03,
     radiusPixels: 30,
   });
+
   return (
     <DeckGL
       layers={[heatmapLayer]}
